@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AppleStore - Техника Apple. Эффективность и стиль</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M31.895 26.622C30.682 28.184 29.392 29.808 27.262 29.808C25.132 29.808 24.217 28.551 21.812 28.551C19.443 28.551 18.305 29.843 16.306 29.843C14.307 29.843 12.865 28.184 11.477 26.596C9.684 24.477 8 20.894 8 17.596C8 12.326 11.699 9.342 15.295 9.342C17.433 9.342 19.148 10.653 20.325 10.653C21.433 10.653 23.314 9.308 25.603 9.308C26.795 9.308 29.018 9.565 30.686 11.311C26.205 13.732 26.837 20.251 31.895 26.622ZM22.789 7.749C23.743 6.584 24.363 5.028 24.363 3.472C24.363 3.249 24.339 3.026 24.29 2.828C22.838 2.878 21.076 3.723 19.95 4.963C19.097 5.903 18.355 7.459 18.355 9.04C18.355 9.29 18.404 9.54 18.428 9.64C18.528 9.665 18.704 9.69 18.88 9.69C20.158 9.69 21.835 8.869 22.789 7.749Z" fill="white"/>
+                </svg>
+                <span class="logo-text">AppleStore</span>
+            </a>
+            
+            <a href="#" class="user-icon" aria-label="Личный кабинет">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main">
+        <!-- Герой-секция -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="hero-title">Техника Apple. Эффективность и стиль.</h1>
+                <p class="hero-subtitle">Инновационные устройства, которые меняют ваш подход к работе, творчеству и повседневной жизни.</p>
+                <a href="#categories" class="hero-button">Смотреть каталог</a>
+            </div>
+        </section>
+
+        <!-- Сетка категорий -->
+        <section id="categories" class="categories">
+            <div class="container">
+                <h2 class="categories-title">Категории товаров</h2>
+                <div class="categories-grid">
+                    <!-- Карточка категории iPhone -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">iPhone</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Карточка категории iPad -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">iPad</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Карточка категории MacBook -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">MacBook</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Колонка 1: О магазине -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M31.895 26.622C30.682 28.184 29.392 29.808 27.262 29.808C25.132 29.808 24.217 28.551 21.812 28.551C19.443 28.551 18.305 29.843 16.306 29.843C14.307 29.843 12.865 28.184 11.477 26.596C9.684 24.477 8 20.894 8 17.596C8 12.326 11.699 9.342 15.295 9.342C17.433 9.342 19.148 10.653 20.325 10.653C21.433 10.653 23.314 9.308 25.603 9.308C26.795 9.308 29.018 9.565 30.686 11.311C26.205 13.732 26.837 20.251 31.895 26.622ZM22.789 7.749C23.743 6.584 24.363 5.028 24.363 3.472C24.363 3.249 24.339 3.026 24.29 2.828C22.838 2.878 21.076 3.723 19.95 4.963C19.097 5.903 18.355 7.459 18.355 9.04C18.355 9.29 18.404 9.54 18.428 9.64C18.528 9.665 18.704 9.69 18.88 9.69C20.158 9.69 21.835 8.869 22.789 7.749Z" fill="white"/>
+                        </svg>
+                        <span class="footer-logo-text">AppleStore</span>
+                    </div>
+                    <p class="footer-about">Официальный дилер техники Apple в России. Мы предлагаем оригинальную продукцию с гарантией и сервисным обслуживанием.</p>
+                </div>
+
+                <!-- Колонка 2: Контакты -->
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-list">
+                        <li><a href="tel:+78001234567" class="footer-link"><i class="fas fa-phone-alt"></i> +7 (800) 123-45-67</a></li>
+                        <li><a href="mailto:info@apple-store.ru" class="footer-link"><i class="fas fa-envelope"></i> info@apple-store.ru</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, д. 10</li>
+                    </ul>
+                </div>
+
+                <!-- Колонка 3: Быстрые ссылки -->
+                <div class="footer-column">
+                    <h3 class="footer-title">Разделы</h3>
+                    <ul class="footer-list">
+                        <li><a href="#" class="footer-link"><i class="fas fa-mobile-alt"></i> iPhone</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-tablet-alt"></i> iPad</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-laptop"></i> MacBook</a></li>
+                        <li><a href="#" class="footer-link"><i class="fas fa-headphones"></i> Аксессуары</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Нижняя полоса подвала -->
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <p class="copyright">© 2026 AppleStore. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#" class="footer-legal-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer-legal-link">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
