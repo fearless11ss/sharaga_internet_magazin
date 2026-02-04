@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О магазине — AppleStore</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-text">AppleStore</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="hero-title">О магазине AppleStore</h1>
+                <p class="hero-subtitle">
+                    Мы специализируемся на продаже оригинальной техники Apple с официальной гарантией и сервисной поддержкой.
+                </p>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h2 class="categories-title">О магазине</h2>
+                <p class="footer-about" style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+                    Официальный дилер техники Apple в России. Мы предлагаем оригинальную продукцию с гарантией и сервисным обслуживанием.
+                </p>
+
+                <div class="footer-content" style="grid-template-columns: 1fr; justify-items: center;">
+                    <div class="footer-column" style="align-items: center; text-align: center;">
+                        <h3 class="footer-title">Контакты</h3>
+                        <ul class="footer-list" style="flex-direction: column; align-items: center;">
+                            <li><a href="tel:+78001234567" class="footer-link">+7 (800) 123-45-67</a></li>
+                            <li><a href="mailto:info@apple-store.ru" class="footer-link">info@apple-store.ru</a></li>
+                            <li>Москва, ул. Тверская, д. 10</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom" style="margin-top: 40px;">
+                    <div class="footer-divider"></div>
+                    <p class="copyright">© 2026 AppleStore. Все права защищены.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+

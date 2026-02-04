@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — AppleStore</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% comment %} Шапка можно переиспользовать позже через base-шаблон {% endcomment %}
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-text">AppleStore</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container hero-content">
+                <h1 class="hero-title">Каталог техники Apple</h1>
+                <p class="hero-subtitle">Выберите категорию, чтобы посмотреть доступные товары.</p>
+            </div>
+        </section>
+
+        <section class="categories">
+            <div class="container">
+                <h2 class="categories-title">Категории товаров</h2>
+                <div class="categories-grid">
+                    <!-- Карточка категории iPhone -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">iPhone</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Карточка категории iPad -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">iPad</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Карточка категории MacBook -->
+                    <a href="#" class="category-card">
+                        <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');">
+                            <div class="category-overlay"></div>
+                            <div class="category-content">
+                                <h3 class="category-name">MacBook</h3>
+                                <span class="category-button">Смотреть все</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
