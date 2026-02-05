@@ -6,11 +6,6 @@ def index(request):
     return render(request, 'shop/index.html')
 
 
-def catalog(request):
-    """Страница каталога товаров."""
-    return render(request, 'shop/catalog.html')
-
-
 def about(request):
     """Страница «О магазине»."""
     return render(request, 'shop/about.html')

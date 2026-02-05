@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AppleStore — Техника Apple{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'index' %}" class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M31.895 26.622C30.682 28.184 29.392 29.808 27.262 29.808C25.132 29.808 24.217 28.551 21.812 28.551C19.443 28.551 18.305 29.843 16.306 29.843C14.307 29.843 12.865 28.184 11.477 26.596C9.684 24.477 8 20.894 8 17.596C8 12.326 11.699 9.342 15.295 9.342C17.433 9.342 19.148 10.653 20.325 10.653C21.433 10.653 23.314 9.308 25.603 9.308C26.795 9.308 29.018 9.565 30.686 11.311C26.205 13.732 26.837 20.251 31.895 26.622ZM22.789 7.749C23.743 6.584 24.363 5.028 24.363 3.472C24.363 3.249 24.339 3.026 24.29 2.828C22.838 2.878 21.076 3.723 19.95 4.963C19.097 5.903 18.355 7.459 18.355 9.04C18.355 9.29 18.404 9.54 18.428 9.64C18.528 9.665 18.704 9.69 18.88 9.69C20.158 9.69 21.835 8.869 22.789 7.749Z" fill="white"/>
+                </svg>
+                <span class="logo-text">AppleStore</span>
+            </a>
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="{% url 'products:catalog' %}" class="nav-link">Каталог</a></li>
+                    <li class="nav-item"><a href="{% url 'products:catalog' %}?category=iphone" class="nav-link">iPhone</a></li>
+                    <li class="nav-item"><a href="{% url 'products:catalog' %}?category=ipad" class="nav-link">iPad</a></li>
+                    <li class="nav-item"><a href="{% url 'products:catalog' %}?category=macbook" class="nav-link">MacBook</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">Поддержка</a></li>
+                    <li class="nav-item">
+                        <a href="{% url 'cart' %}" id="cart-link" class="nav-link">
+                            Корзина (<span id="cart-count">{{ cart.total_items|default:0 }}</span>)
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                    <li class="nav-item"><a href="{% url 'admin:products_product_changelist' %}" class="nav-link">Админ панель</a></li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" class="logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link nav-link-btn">Выйти</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="header-right">
+                {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'admin:products_product_changelist' %}" class="user-icon desktop-only" aria-label="Админ панель"><i class="fas fa-cog"></i></a>
+                {% else %}
+                <a href="{% url 'login' %}" class="user-icon desktop-only" aria-label="Войти"><i class="fas fa-user"></i></a>
+                {% endif %}
+                <button class="burger-btn" aria-label="Открыть меню" aria-expanded="false">
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                </button>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <h3 class="mobile-menu-title">Меню</h3>
+                    <button class="mobile-close-btn" aria-label="Закрыть меню"><i class="fas fa-times"></i></button>
+                </div>
+                <nav class="mobile-nav">
+                    {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'admin:products_product_changelist' %}" class="mobile-profile-btn">
+                        <i class="fas fa-cog"></i>
+                        <span>Админ панель</span>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="mobile-profile-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Мой профиль</span>
+                    </a>
+                    {% endif %}
+                    <ul class="mobile-nav-list">
+                        <li class="mobile-nav-item"><a href="{% url 'index' %}" class="mobile-nav-link">Главная</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'products:catalog' %}" class="mobile-nav-link">Каталог</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'products:catalog' %}?category=iphone" class="mobile-nav-link">iPhone</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'products:catalog' %}?category=ipad" class="mobile-nav-link">iPad</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'products:catalog' %}?category=macbook" class="mobile-nav-link">MacBook</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'about' %}" class="mobile-nav-link">Поддержка</a></li>
+                        <li class="mobile-nav-item"><a href="{% url 'cart' %}" class="mobile-nav-link">Корзина ({{ cart.total_items|default:0 }})</a></li>
+                        {% if user.is_staff %}
+                        <li class="mobile-nav-item"><a href="{% url 'admin:products_product_changelist' %}" class="mobile-nav-link">Админ панель</a></li>
+                        {% endif %}
+                        <li class="mobile-nav-item"><a href="{% url 'about' %}" class="mobile-nav-link">О магазине</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="menu-overlay"></div>
+        </div>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M31.895 26.622C30.682 28.184 29.392 29.808 27.262 29.808C25.132 29.808 24.217 28.551 21.812 28.551C19.443 28.551 18.305 29.843 16.306 29.843C14.307 29.843 12.865 28.184 11.477 26.596C9.684 24.477 8 20.894 8 17.596C8 12.326 11.699 9.342 15.295 9.342C17.433 9.342 19.148 10.653 20.325 10.653C21.433 10.653 23.314 9.308 25.603 9.308C26.795 9.308 29.018 9.565 30.686 11.311C26.205 13.732 26.837 20.251 31.895 26.622ZM22.789 7.749C23.743 6.584 24.363 5.028 24.363 3.472C24.363 3.249 24.339 3.026 24.29 2.828C22.838 2.878 21.076 3.723 19.95 4.963C19.097 5.903 18.355 7.459 18.355 9.04C18.355 9.29 18.404 9.54 18.428 9.64C18.528 9.665 18.704 9.69 18.88 9.69C20.158 9.69 21.835 8.869 22.789 7.749Z" fill="white"/>
+                        </svg>
+                        <span class="footer-logo-text">AppleStore</span>
+                    </div>
+                    <p class="footer-about">Официальный дилер техники Apple в России. Мы предлагаем оригинальную продукцию с гарантией и сервисным обслуживанием.</p>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Контакты</h3>
+                    <ul class="footer-list">
+                        <li><a href="tel:+78001234567" class="footer-link"><i class="fas fa-phone-alt"></i> +7 (800) 123-45-67</a></li>
+                        <li><a href="mailto:info@apple-store.ru" class="footer-link"><i class="fas fa-envelope"></i> info@apple-store.ru</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Тверская, д. 10</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Разделы</h3>
+                    <ul class="footer-list">
+                        <li><a href="{% url 'products:catalog' %}?category=iphone" class="footer-link"><i class="fas fa-mobile-alt"></i> iPhone</a></li>
+                        <li><a href="{% url 'products:catalog' %}?category=ipad" class="footer-link"><i class="fas fa-tablet-alt"></i> iPad</a></li>
+                        <li><a href="{% url 'products:catalog' %}?category=macbook" class="footer-link"><i class="fas fa-laptop"></i> MacBook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-divider"></div>
+                <p class="copyright">© 2026 AppleStore. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#" class="footer-legal-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer-legal-link">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+    (function() {
+        var csrfToken = '{{ csrf_token }}';
+        function addToCart(productId, quantity) {
+            quantity = quantity || 1;
+            fetch('{% url "add_to_cart" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ product_id: productId, quantity: quantity })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    var el = document.getElementById('cart-count');
+                    if (el) el.textContent = data.cart_total;
+                    alert(data.message);
+                }
+            })
+            .catch(function(e) { console.error(e); });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.add-to-cart').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var id = btn.dataset.productId;
+                    var qtyEl = document.getElementById('quantity');
+                    var qty = qtyEl ? parseInt(qtyEl.value, 10) || 1 : 1;
+                    addToCart(id, qty);
+                });
+            });
+        });
+    })();
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

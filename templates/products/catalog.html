@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог — AppleStore{% endblock %}
+
+{% block content %}
+<section class="hero hero-small">
+    <div class="container hero-content">
+        <h1 class="hero-title">Каталог техники Apple</h1>
+        <p class="hero-subtitle">Оригинальная техника Apple с гарантией и сервисной поддержкой</p>
+    </div>
+</section>
+
+<section class="catalog-section">
+    <div class="container">
+        <form method="get" class="catalog-toolbar">
+            <div class="catalog-filters">
+                <a href="{% url 'products:catalog' %}" class="filter-link">Все категории</a>
+                {% for cat in categories %}
+                <a href="?category={{ cat.slug }}" class="filter-link {% if request.GET.category == cat.slug %}active{% endif %}">{{ cat.name }}</a>
+                {% endfor %}
+            </div>
+            <div class="catalog-search-sort">
+                <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Поиск товаров..." class="search-input">
+                <select name="sort" class="sort-select">
+                    <option value="name" {% if request.GET.sort == "name" or not request.GET.sort %}selected{% endif %}>По названию</option>
+                    <option value="price_asc" {% if request.GET.sort == "price_asc" %}selected{% endif %}>Сначала дешевле</option>
+                    <option value="price_desc" {% if request.GET.sort == "price_desc" %}selected{% endif %}>Сначала дороже</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+        </form>
+
+        <div class="products-grid">
+            {% for product in products %}
+            <article class="product-card">
+                <a href="{{ product.get_absolute_url }}" class="product-card-link">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-card-image">
+                    {% else %}
+                    <div class="product-card-image product-card-image-placeholder"><i class="fas fa-image"></i></div>
+                    {% endif %}
+                    <h3 class="product-card-title">{{ product.name }}</h3>
+                    <p class="product-card-price">{{ product.price }} руб.</p>
+                </a>
+                <button type="button" class="btn btn-add add-to-cart" data-product-id="{{ product.id }}">В корзину</button>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-outline">Подробнее</a>
+            </article>
+            {% empty %}
+            <p class="catalog-empty">Товаров не найдено</p>
+            {% endfor %}
+        </div>
+
+        {% if products.has_other_pages %}
+        <nav class="pagination">
+            {% if products.has_previous %}
+            <a href="?page={{ products.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" class="pagination-link">« Назад</a>
+            {% endif %}
+            {% for num in products.paginator.page_range %}
+            {% if products.number == num %}
+            <span class="pagination-current">{{ num }}</span>
+            {% else %}
+            <a href="?page={{ num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" class="pagination-link">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+            {% if products.has_next %}
+            <a href="?page={{ products.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}" class="pagination-link">Вперед »</a>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

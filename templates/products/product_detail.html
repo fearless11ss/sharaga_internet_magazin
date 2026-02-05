@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="product-detail-section">
+    <div class="container">
+        <article class="product-detail">
+            <div class="product-detail-image-wrap">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image">
+                {% else %}
+                <div class="product-detail-image product-detail-image-placeholder"><i class="fas fa-image"></i></div>
+                {% endif %}
+            </div>
+            <div class="product-detail-info">
+                <h1 class="product-detail-title">{{ product.name }}</h1>
+                <p class="product-detail-price">{{ product.price }} руб.</p>
+                <p class="product-detail-description">{{ product.description }}</p>
+                <p class="product-detail-meta">Категория: <a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></p>
+                <p class="product-detail-meta">В наличии: {{ product.stock }} шт.</p>
+                <form method="post" action="{% url 'add_to_cart' %}" class="product-detail-actions">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <label>
+                        Количество: <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ product.stock }}" class="quantity-input">
+                    </label>
+                    <button type="submit" class="btn btn-primary add-to-cart" data-product-id="{{ product.id }}">Добавить в корзину</button>
+                </form>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

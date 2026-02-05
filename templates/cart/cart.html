@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Корзина — AppleStore{% endblock %}
+
+{% block content %}
+<section class="hero hero-small">
+    <div class="container hero-content">
+        <h1 class="hero-title">Корзина покупок</h1>
+    </div>
+</section>
+
+<section class="cart-section">
+    <div class="container">
+        {% if cart.items.exists %}
+        <ul class="cart-list">
+            {% for item in cart.items.all %}
+            <li class="cart-item">
+                <div class="cart-item-image">
+                    {% if item.product.image %}
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                    {% else %}
+                    <span class="cart-item-no-image"><i class="fas fa-image"></i></span>
+                    {% endif %}
+                </div>
+                <div class="cart-item-info">
+                    <a href="{{ item.product.get_absolute_url }}" class="cart-item-name">{{ item.product.name }}</a>
+                    <p class="cart-item-price">{{ item.product.price }} руб. × {{ item.quantity }} = {{ item.total_price }} руб.</p>
+                </div>
+                <form method="post" action="{% url 'remove_from_cart' item.id %}" class="cart-item-remove">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="cart-total">Итого: <strong>{{ cart.total_price }} руб.</strong> ({{ cart.total_items }} шт.)</p>
+        {% else %}
+        <p class="cart-empty">Корзина пуста. <a href="{% url 'products:catalog' %}">Перейти в каталог</a></p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
